@@ -1,4 +1,4 @@
-package com.joconner.g11n.charprop.resource;
+package com.joconner.g11n.charprop.model;
 
 import java.util.Objects;
 

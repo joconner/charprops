@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * Created by joconner on 1/8/16.
  */
-@Path("/property")
+@Path("/char")
 @Component
 public class CharPropertyResource {
 }

@@ -1,5 +1,6 @@
 package com.joconner.g11n.charprop.resource;
 
+import com.joconner.g11n.charprop.model.HealthCheckStatus;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;

@@ -5,6 +5,7 @@
  */
 package com.joconner.g11n.charprop.resource;
 
+import com.joconner.g11n.charprop.model.HealthCheckStatus;
 import com.joconner.g11n.charprop.CharpropApplication;
 import com.joconner.g11n.charprop.config.JerseyConfig;
 import javax.ws.rs.core.Application;
