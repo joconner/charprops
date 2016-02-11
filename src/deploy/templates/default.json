@@ -1,0 +1,16 @@
+{
+  "Resources": {
+    "I45JNS": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "ImageId": "ami-9abea4fb",
+        
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "337763b2-72d3-44b7-b544-862398a29044"
+        }
+      }
+    }
+  }
+}

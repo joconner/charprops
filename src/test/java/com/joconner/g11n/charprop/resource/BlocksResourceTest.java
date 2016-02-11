@@ -1,6 +1,8 @@
 package com.joconner.g11n.charprop.resource;
 
+import com.joconner.g11n.charprop.CharpropApplication;
 import com.joconner.g11n.charprop.config.BlocksResourceTestConfig;
+import com.joconner.g11n.charprop.config.JerseyConfig;
 import com.joconner.g11n.charprop.model.Block;
 import java.util.List;
 import javax.ws.rs.core.Application;
@@ -11,21 +13,26 @@ import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author joconner
  */
 public class BlocksResourceTest extends JerseyTest {
+
+    
     
     public Application configure() {
-          ApplicationContext context = new AnnotationConfigApplicationContext(BlocksResourceTestConfig.class);
-          ResourceConfig config = new ResourceConfig();
-          config.register(BlocksResource.class);
-          config.property("contextConfig", context);
-          return config;
+        ApplicationContext context = new AnnotationConfigApplicationContext(BlocksResourceTestConfig.class);
+        ResourceConfig config = new ResourceConfig();
+        config.register(BlocksResource.class);
+        config.property("contextConfig", context);  
+        return config;
     }
     
     
@@ -40,21 +47,13 @@ public class BlocksResourceTest extends JerseyTest {
     }
     
     @Test
-    public void testReturnBlockFromDecimalCodePointUrl() {
-        Response response = target("/blocks/block/125")
-                .request(MediaType.APPLICATION_JSON)
-                .get();
-        Block b = response.readEntity(Block.class);
-        Assert.assertEquals("Basic Latin", b.getName());
-    }
-    
-    @Test
-    @Ignore
     public void testReturnBlockFromHexCodePointUrl() {
-        Response response = target("/blocks/block/0x0125")
+        Response response = target("/blocks/block/004A")
                 .request(MediaType.APPLICATION_JSON)
                 .get();
         Block b = response.readEntity(Block.class);
         Assert.assertNotNull(b);
+        Assert.assertEquals("Basic Latin", b.getName());
     }
+    
 }

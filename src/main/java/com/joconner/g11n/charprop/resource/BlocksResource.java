@@ -30,20 +30,27 @@ public class BlocksResource {
         List<Block> blocks = blockService.getBlocks();
         return Response.ok(blocks).build();
     }
-    
+//    
+//    @GET
+//    @Path("/block/{ch: \\p{Digit}+}")
+//    public Response getBlockForDecimalDigits(@PathParam("ch") int ch) {
+//        Block b = blockService.getBlockFor(ch);
+//        return Response.ok(b).build();
+//    }
+//    
     @GET
-    @Path("/block/{ch: \\p{Digit}+}")
-    public Response getBlockForDecimalDigits(@PathParam("ch") int ch) {
-        Block b = blockService.getBlockFor(ch);
-        return Response.ok(b).build();
+    @Path("/block/{ch: \\p{XDigit}{1,6}}")
+    public Response getBlockForHexDigits(@PathParam("ch") String strHex) {
+        Response resp = null;
+        try {
+            int ch = Integer.parseUnsignedInt(strHex, 16);
+            Block b = blockService.getBlockFor(ch);
+            resp = Response.ok(b).build();
+        } catch (NumberFormatException ex) {
+            resp = Response.status(Response.Status.BAD_REQUEST).build();
+        }
+        
+        return resp;
     }
-    
-    @GET
-    @Path("/block/{ch: 0[xX]\\p{XDigit}+}")
-    public Response getBlockForHexDigits(@PathParam("ch") int ch) {
-        Block b = blockService.getBlockFor(ch);
-        return Response.ok(b).build();
-    }
-    
     
 }

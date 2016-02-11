@@ -1,0 +1,27 @@
+{
+    "Resources": {
+        "bastion-server": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": "ami-775e4f16",
+                "InstanceType": "t2.small",
+                "SecurityGroupIds": [
+                    "sg-5e341f3a"
+                ],
+                "KeyName": "bastion",
+                "SubnetId": "subnet-e7232ca1"
+            }
+        },
+        "charprop-server": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": "ami-775e4f16",
+                "InstanceType": "t2.large",
+                "SecurityGroupIds": ["sg-f53d1691"],
+                "KeyName": "bastion",
+                "SubnetId": "subnet-33ee0144"
+            }            
+        }
+    }
+
+}
