@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * A Block represents a contiguous sequence of characters from the Unicode
+ * database. Characters in the sequence share a common property called a 
+ * 'block'. A Block contains characters that are usually in the same script, 
+ * but not necessarily.
  */
 package com.joconner.g11n.charprop.model;
 
@@ -77,7 +78,7 @@ public class Block {
         if (this.end != other.end) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
+        if (!this.name.equals(other.name)) {
             return false;
         }
         return true;

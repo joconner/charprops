@@ -1,0 +1,85 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Resources": {
+    "VPC01": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "10.0.0.0/28",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "vpc-charprop"
+          }
+        ]
+      }
+    },
+    "SUBNET01": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "VPC01"
+        },
+        "CidrBlock": "10.0.0.0/28",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "subnet-charprop-public"
+          }
+        ]
+      }
+    },
+    "GATEWAY01": {
+      "Type": "AWS::EC2::InternetGateway",
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "igw-charprop"
+          }
+        ]
+      }
+    },
+    "GATEWAYATTACHMENT01": {
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+      "Properties": {
+        "InternetGatewayId": {"Ref": "GATEWAY01"},
+        "VpcId": {"Ref": "VPC01"}
+      }
+    },
+    "ROUTETABLE01": {
+      "Type": "AWS::EC2::RouteTable",
+      "DependsOn": "VPC01",
+      "Properties": {
+        "VpcId": {
+          "Ref": "VPC01"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "rtb-charprop"
+          }
+        ]
+      }
+    },
+    "ROUTE01": {
+      "Type": "AWS::EC2::Route",
+      "DependsOn": "GATEWAY01",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "ROUTETABLE01"
+        },
+        "GatewayId": {
+          "Ref": "GATEWAY01"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0"
+      }
+    },
+    "SUBNETATTACHMENT01": {
+      "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties" : {
+        "RouteTableId" : {"Ref": "ROUTETABLE01"},
+        "SubnetId" : {"Ref": "SUBNET01"}
+      }
+    }
+  }
+}

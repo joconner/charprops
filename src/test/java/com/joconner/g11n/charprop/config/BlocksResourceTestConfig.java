@@ -2,6 +2,7 @@ package com.joconner.g11n.charprop.config;
 
 import com.joconner.g11n.charprop.resource.BlocksResource;
 import com.joconner.g11n.charprop.service.BlocksService;
+import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,4 +22,5 @@ public class BlocksResourceTestConfig {
     public BlocksResource blocksResource() {
         return new BlocksResource();
     }
+    
 }

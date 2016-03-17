@@ -10,10 +10,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
+
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -25,7 +27,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 public class BlocksResourceTest extends JerseyTest {
 
-    
+    @Autowired
+    ResourceConfig config;
     
     public Application configure() {
         ApplicationContext context = new AnnotationConfigApplicationContext(BlocksResourceTestConfig.class);
@@ -38,7 +41,8 @@ public class BlocksResourceTest extends JerseyTest {
     
     @Test
     public void testBlocksListExists() {
-        Response response = target("/blocks").request(MediaType.APPLICATION_JSON)
+        Response response = target("/blocks")
+                .request(MediaType.APPLICATION_JSON)
                 .get();
         Assert.assertEquals(200, response.getStatus());
         List<Block> blocks = response.readEntity(List.class);
