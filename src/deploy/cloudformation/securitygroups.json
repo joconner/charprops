@@ -1,0 +1,32 @@
+{
+    "SECURITYGROUP01": {
+        "Type": "AWS::EC2::SecurityGroup",
+        "Properties": {
+            "GroupDescription": "Security group for app servers",
+            "SecurityGroupEgress": [
+                {
+                    "CidrIp": "0.0.0.0/0",
+                    "IpProtocol": "-1"
+                }
+            ],
+            "SecurityGroupIngress": [
+                {
+                    "CidrIp": "0.0.0.0/0",
+                    "IpProtocol": "tcp",
+                    "ToPort": 22,
+                    "FromPort": 22
+                },
+                {
+                    "CidrIp": "0.0.0.0/0",
+                    "IpProtocol": "tcp",
+                    "ToPort": 80
+                },
+                {
+                    "CidrIp": "0.0.0.0/0",
+                    "IpProtocol": "tcp",
+                    "ToPort": 443
+                }
+            ]
+        }
+    }
+}

@@ -1,5 +1,4 @@
 {
-  "AWSTemplateFormatVersion": "2010-09-09",
   "Resources": {
     "VPC01": {
       "Type": "AWS::EC2::VPC",
@@ -42,8 +41,12 @@
     "GATEWAYATTACHMENT01": {
       "Type": "AWS::EC2::VPCGatewayAttachment",
       "Properties": {
-        "InternetGatewayId": {"Ref": "GATEWAY01"},
-        "VpcId": {"Ref": "VPC01"}
+        "InternetGatewayId": {
+          "Ref": "GATEWAY01"
+        },
+        "VpcId": {
+          "Ref": "VPC01"
+        }
       }
     },
     "ROUTETABLE01": {
@@ -75,10 +78,15 @@
       }
     },
     "SUBNETATTACHMENT01": {
-      "Type" : "AWS::EC2::SubnetRouteTableAssociation",
-      "Properties" : {
-        "RouteTableId" : {"Ref": "ROUTETABLE01"},
-        "SubnetId" : {"Ref": "SUBNET01"}
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "ROUTETABLE01"
+        },
+        "SubnetId": {
+          "Ref": "SUBNET01"
+        }
       }
     }
   }
