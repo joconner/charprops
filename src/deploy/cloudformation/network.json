@@ -1,4 +1,5 @@
 {
+  "AWSTemplateFormatVersion" : "2010-09-09",
   "Resources": {
     "VPC01": {
       "Type": "AWS::EC2::VPC",
@@ -79,11 +80,62 @@
     },
     "SUBNETATTACHMENT01": {
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
-
       "Properties": {
         "RouteTableId": {
           "Ref": "ROUTETABLE01"
         },
+        "SubnetId": {
+          "Ref": "SUBNET01"
+        }
+      }
+    },
+    "SECURITYGROUPSSH": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Enable SSH access to port 22",
+        "VpcId": {
+          "Ref": "VPC01"
+        },
+        "SecurityGroupIngress": [
+          {
+            "CidrIp" : "0.0.0.0/0",
+            "IpProtocol" : "tcp",
+            "ToPort" : 22,
+            "FromPort": 22
+          }
+        ]
+      }
+    },
+    "SECURITYGROUPAPPSERVER": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Enable HTTP/S access on port 80/443",
+        "VpcId": {
+          "Ref": "VPC01"
+        },
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "ToPort":80,
+            "FromPort": 80
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "ToPort":443,
+            "FromPort": 443
+          }
+        ]
+      }
+    },
+    "SERVER01": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "ImageId": "ami-d2c924b2",
+        "SecurityGroupIds": [ {"Ref": "SECURITYGROUPAPPSERVER"}, {"Ref": "SECURITYGROUPSSH"}],
+        "InstanceType": "t2.micro",
+        "KeyName": "charprop",
         "SubnetId": {
           "Ref": "SUBNET01"
         }

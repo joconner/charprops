@@ -4,7 +4,7 @@ stackstatus=""
 attempts=1
 
 STACKNAME="stack-charprop-network"
-STACKTEMPLATE="../cloudformation/network.json"
+STACKTEMPLATE="../cloudformation/network.template"
 ATTEMPT_LIMIT=10
 
 aws cloudformation create-stack --stack-name $STACKNAME --template-body file://$STACKTEMPLATE

@@ -6,8 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CharpropApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CharpropApplication.class, args);
-	}
-        
+    public static void main(String[] args) {
+        SpringApplication.run(CharpropApplication.class, args);
+    }
+
+
 }
