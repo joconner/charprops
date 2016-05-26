@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
-stackstatus=""
-attempts=1
-
 STACKNAME="stack-charprop-network"
 STACKTEMPLATE="../cloudformation/network.json"
 ATTEMPT_LIMIT=10
 
+stackstatus=""
+attempts=1
+
 aws cloudformation create-stack --stack-name $STACKNAME --template-body file://$STACKTEMPLATE
+
 while [ "$stackstatus" != "CREATE_COMPLETE" ]  && [ $attempts  -lt $ATTEMPT_LIMIT ]; do
     echo "$STACKNAME creation in progress"
     sleep 10

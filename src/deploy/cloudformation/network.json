@@ -138,6 +138,9 @@
         "KeyName": "charprop",
         "SubnetId": {
           "Ref": "SUBNET01"
+        },
+        "UserData": {
+
         }
       }
     }
